@@ -5,8 +5,7 @@ from messenger_app import models
 def index(request):
     return render(request, 'messenger_app/index.html')
 
-def chat_page_view(request, room_name):
-    return render(request, 'messenger_app/chat_page.html', {
-        'room_name' : room_name
-    })
+def chat_page_view(request):
+    return render(request, 'messenger_app/chat_page.html')
 
+    

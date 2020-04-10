@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'messenger_app',
-    'channels',
+    'messenger_app'
 ]
 
 MIDDLEWARE = [
@@ -121,6 +120,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Channels
-ASGI_APPLICATION = 'idle.routing.application'
