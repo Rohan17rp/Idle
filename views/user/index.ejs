@@ -1,0 +1,17 @@
+<%- include("../partials/header") %>
+<h2>Create a Group</h2>
+<form action="/api/users/<%= user_id %>/groups" method="POST">
+    <input type="text" name="groupName" placeholder="Name">
+    <button>Submit</button>
+</form>
+<ul>
+    <% groups.forEach(group => { %>
+        <li>
+            <a href="/users/<%= user_id %>/groups/<%= group.id %>">
+                <%= group.groupName %>
+            </a>
+        </li>
+    <% }) %>
+</ul>
+
+<%- include("../partials/footer") %>

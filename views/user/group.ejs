@@ -1,0 +1,23 @@
+<%- include("../partials/header") %>
+<h2>Add a Member</h2>
+<form action="/api/users/<%= user_id %>/groups/<%= group.id %>" method="POST">
+    <input type="text" name="username" placeholder="Name">
+    <button>Submit</button>
+</form>
+
+<li>
+    <% group.messages.forEach(message => { %>
+        <ul>
+            <%= message.user %>
+            <br>
+            <%= message.data %>  
+        </ul>
+    <% }) %>
+</li>
+
+<h2>Send a message</h2>
+<form action="/api/users/<%= user_id %>/groups/<%= group.id %>/messages" method="POST">
+    <input type="text" name="data" placeholder="message">
+    <button>Submit</button>
+</form>
+<%- include("../partials/footer") %>
