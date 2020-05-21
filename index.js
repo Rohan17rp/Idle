@@ -2,8 +2,9 @@ require('dotenv').config();
 const express     = require('express'),
     app           = express(),
     router        = express.Router(),
-    server        = require('http').Server(app),
-    io            = require('socket.io')(server),
+    server        = require('http').createServer(app),
+    socketio      = require('socket.io'),
+    io            = socketio(server),
     bodyParser    = require('body-parser'),
     errorHandler  = require('./handlers/error'),
     authRoutes    = require('./routes/auth'),
@@ -12,7 +13,7 @@ const express     = require('express'),
     tempRoutes    = require('./routes/temps');
     db            = require('./models');
 
-PORT = 8081;
+PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -78,10 +79,16 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-io.on('connection', (socket) => {
-    console.log("user is connected");
+let user_count = 0
+
+io.on('connection', (socket) => { 
+    console.log('User Connected');
+
+    socket.on('sendMsg', (msg) => {
+        io.emit('message', msg);
+    })
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log("[*] Idle server listening on port " + PORT);
 })
